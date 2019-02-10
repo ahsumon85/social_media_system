@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/template.xhtml">
+
+<ui:define name="content">
+	
+	<h:form id="messages" enctype="multipart/form-data">
+	<p:growl/>
+	<style>
+	/* .erty:hover {background-color:#b6c1cb;color:#fff !important;width:100%;borde-radius:9px !important;transform:scale(1.1);transition:1s;}
+	 */
+	.erty:hover a {background-color:#b6c1cb;color:#fff !important;width:100%;}
+	 
+	
+	</style>
+			
+		<div style="position:fixed;height:413px;overflow-y:scroll;overflow-x:hidden;width: 20%; float: left; margin-left:10px;-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+					-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+					box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);">
+	
+			<p:dataScroller value="#{hubmorController.userActiveList}" var="active">
+	
+			<h:panelGrid class="erty" columns="2" cellpadding="3">
+	  		 <p:graphicImage value="/Upload/picture/#{active.userBasicInfo.photoPath}" style="width:30px; height:30px;  border-radius: 60px;" />
+				<h:commandLink value="#{active.userBasicInfo.name}" style=" text-decoration:none;">
+				<f:setPropertyActionListener value="#{active}" target="#{hubmorController.usersActiveDTO}"/>
+				</h:commandLink>
+			</h:panelGrid>
+			</p:dataScroller>
+			
+		</div>
+		
+	
+	
+	<div id="show_mass" style="width: 45.5%; float: left">
+	
+	
+	<p:dataScroller class="name"  var="status" style="border:none; width:500px;"> 
+            <p:outputPanel class="erty"  style="background:white; margin-bottom:8px; margin-top:5px">
+               
+               <h:panelGrid style="margin-left:10px">
+                <h:outputText value="#{hubmorController.usersActiveDTO.userName}" style="font-weight: bold; color:blue;"/>
+               </h:panelGrid>
+               
+          </p:outputPanel>
+     
+    </p:dataScroller>			
+	</div><br/>
+	
+		<div id="mass_text" style="float: left;padding:30px;margin-left:280px;" >
+			<div style="height: 30px; ">
+				<h:outputText value="#{hubmorController.usersActiveDTO.userBasicInfo.name}" style="font-weight: bold; "/>
+			</div>
+			 <p:inputTextarea placeholder="Write messages..." update="messages"  style=" background:white;margin-bottom: -6px;" rows="2" cols="50"/>
+	
+			 <p:commandButton icon="fa fa-send" action="#{loginController.statusSave}" value="Send" update="status" ajax="false" style="background:none; "/>
+			
+		</div>
+	
+
+			  
+	</h:form>	
+
+</ui:define>
+
+</ui:composition>

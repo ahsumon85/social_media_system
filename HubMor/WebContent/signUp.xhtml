@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+                
+       
+    <h:head>
+    <title>Sing Up</title>
+    </h:head>   
+       
+                
+
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link href="css/signUp.css" rel='stylesheet' type='text/css' />
+
+<link href="//fonts.googleapis.com/css?family=Signika:300,400,700" rel="stylesheet" />
+<link href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet" />
+
+<h:form id="signUP">
+
+		<div class="main-grid">
+			<div class="agile-grids">	
+				
+				<div class="grids">
+					
+					
+					<div class="forms-grids">
+						<div class="forms3">
+						<div class="w3agile-validation w3ls-validation">
+							<div class="panel panel-widget agile-validation register-form" style="margin-left: 251px;" >
+								<div class="validation-grids widget-shadow" data-example-id="basic-forms" style="width: 45.5%; float: left; margin-left: 26%; background: none" > 
+									<div class="input-info">
+										<h3>Sing Up</h3>
+									</div>
+									<div class="form-body form-body-info">
+										
+											<div class="form-group valid-form">
+												<p:inputText value="#{loginController.userBasicInfoDTO.name}" type="text" class="form-control" id="inputName" name="name" placeholder="Full Name" />
+											</div>
+											<div class="form-group has-feedback">
+												<p:inputText value="#{loginController.userBasicInfoDTO.email}" type="email" class="form-control inputEmail" name="Email" placeholder="Email (email will be used as username)" data-error="That email address is invalid" />
+												<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+												<span class="help-block with-errors">Please enter a valid email address</span>
+											</div>
+											<div class="form-group">
+											  <p:inputText value="#{loginController.userBasicInfoDTO.password}" type="password" data-toggle="validator" data-minlength="6" class="form-control inputPassword" name="Password" placeholder="Password"  />
+											  <span class="help-block">Minimum of 6 characters</span>
+											</div>
+											<div class="form-group">
+											  <p:inputText  type="password" class="form-control" id="inputPasswordConfirm" data-match=".inputPassword" data-match-error="Whoops, these don't match" name="Confirm password" placeholder="Confirm password"  />
+											  <div class="help-block with-errors"></div>
+											</div>
+											<div class="form-group">
+												<div class="radio">
+												  <p:selectOneRadio style="margin:10px; font-size: 19px; font-family: initial;"  value="#{loginController.userBasicInfoDTO.gender}">
+										            <f:selectItem itemLabel="Male" itemValue="Male"/>
+										            <f:selectItem itemLabel="Female" itemValue="Female" />
+										        </p:selectOneRadio>
+												</div>
+											</div>
+											
+											<div>
+												<p:commandButton value="Submit" action="#{loginController.signUp}" update="signUP"/>
+											</div>
+											
+											<div class="clearfix"> 
+													<p:outputLabel style="color:red" value="#{loginController.loginErrorMsg}"/>
+													</div>
+									
+									</div>
+								</div>
+							</div>
+							</div>
+							</div>
+							</div>
+							</div>
+							</div>
+							</div>
+				
+</h:form>
+		<script type="text/javascript" src="js/valida.2.1.6.min.js"></script>
+		<script type="text/javascript" >
+
+			$(document).ready(function() {
+
+				
+				$('#version').valida( 'version' );
+
+			
+				$('.valida').valida();
+
+				
+				$('#partial-1').on('click', function( ev ) {
+					ev.preventDefault();
+					$('#res-1').click(); // clear form error msgs
+					$('form').valida('partial', '#field-1'); // validate only field-1
+					$('form').valida('partial', '#field-1-3'); // validate only field-1-3
+				});
+
+			});
+
+		</script>
+	
+		<script src="js/validator.min.js"></script>
+		
+</ui:composition>

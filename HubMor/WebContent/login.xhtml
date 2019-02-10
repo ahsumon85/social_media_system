@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                >
+                
+<h:head>
+<title>Login</title>
+</h:head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Registration / Login form template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet" />
+
+
+ 
+<link href="//fonts.googleapis.com/css?family=Signika:300,400,700" rel="stylesheet" />
+<link href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet" />
+
+<h:form>
+<div class="panel panel-widget agile-validation">
+
+								<div class="validation-grids"  style="margin-top: 10%; width: 400px; margin-left: 450">
+									<div class="widget-shadow login-form-shadow" data-example-id="basic-forms"> 
+										<div class="input-info">
+											<h3>Login</h3>
+										</div>
+										<div class="form-body form-body-info">
+										
+												<div class="form-group has-feedback">
+													<p:inputText type="email" value="#{loginController.usersDTO.userName}" class="form-control inputEmail" name="Eamil" placeholder="Enter Your Email" data-error="Bruh, that email address is invalid" required="" />
+													<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+												</div>
+												<div class="form-group">
+													<p:inputText type="password" value="#{loginController.password}" data-toggle="validator" data-minlength="6" class="form-control inputPassword" name="Password" placeholder="Password" required="" />
+												</div>
+												<div class="bottom">
+													<div class="form-group">
+														
+													</div>
+													<div class="form-group" style="margin-left:10%">
+														<p:commandButton action="#{loginController.login}" value="Login" icon="fa fa-sign-in" title="login"/>
+													</div>
+													<div style="float:right">
+													<a href="signUp.xhtml?faces-redirect=true" style="color:white">Sing Up</a>
+													</div>
+												</div>
+										
+										</div>
+									</div>
+								</div>
+							
+							</div>
+					</h:form>
+					
+					
+						<div class="clear"> </div>
+					
+		
+		<div class="footer">
+			<p>© 2017 Registration / Login form . All Rights Reserved . Design by <a href="https://www.facebook.com/profile.php?id=100009672303621" target="_blank">Habib Sumon</a></p>
+		</div>
+
+	
+</ui:composition>

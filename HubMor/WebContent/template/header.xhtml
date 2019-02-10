@@ -1,0 +1,49 @@
+<ui:composition  	xmlns="http://www.w3.org/1999/xhtml"
+				    xmlns:h="http://java.sun.com/jsf/html"
+				    xmlns:ui="http://java.sun.com/jsf/facelets"
+				    xmlns:p="http://primefaces.org/ui"
+				    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    
+   
+  
+    
+ <h:form style="border:none;">
+    <style>
+   
+    .ui-datascroller-content{border:none !important;}
+     .ui-datascroller-content table tr td:hover {color:#333 !important; }
+    .ui-datascroller-content table tr td button:hover {color:#fff !important; background-color:blue !important;}
+    
+   
+   /* 	.erty:hover {background-color:#b6c1cb;color:#fff !important;width:100%;borde-radius:9px !important;transform:scale(1.1);transition:1s;}
+    .ui-datascroller-content table tr td:hover {color:#333 !important; }
+    .ui-datascroller-content table tr td button:hover {color:#fff !important; background-color:blue !important;}
+    
+ */    </style>
+    
+     
+	<div class="" style="background: blue">
+     <p:dataScroller value="#{loginController.userBasicInfoList}" var="user" style="border:none !important;" >
+    
+               <h:panelGrid class="erty" columns="7" style="float:left; width:400px;margin-left:500px;">
+            	  <p:graphicImage action="/user/profile.xhtml?faces-redirect=true" value="/Upload/picture/#{user.photoPath}" style="padding:5px;width:40px; height:40px;  border-radius: 60px; margin-left:10%" /> 
+
+                	<h:outputText action="/user/profile.xhtml?faces-redirect=true" value="#{user.name}" style="font-weight: 400; font-weight: bold;" />
+         			<p:commandButton  action="/user/timeline.xhtml?faces-redirect=true" title="Home" icon="fa fa-home" ajax="false" style="background:none"/>
+                	
+                	<p:commandButton  action="/user/messages.xhtml?faces-redirect=true" title="Message" icon="fa fa-envelope" ajax="false" style="background:none"/>
+                	
+                	<p:commandButton  action="/user/profile.xhtml?faces-redirect=true" title="Profile" icon="fa fa-user" style="background:none"/>
+                	
+                	<p:commandButton  action="#{loginController.logout}" title="Log out" icon="fa fa-sign-out" ajax="false" style="background:none"/>
+               </h:panelGrid>          
+
+	</p:dataScroller>
+</div>
+     
+  </h:form>
+  <c:if test="#{loginController.userInValidity}">
+     <script type="text/javascript">window.location.href='../login.xhtml'</script>
+</c:if>
+</ui:composition>

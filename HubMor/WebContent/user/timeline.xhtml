@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/template.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="timeline" enctype="multipart/form-data" >
+	
+	<div  id="status_bar" style="margin-left: 11%;">
+
+			  <p:inputTextarea value="what's in your mind?" icon="fa fa-edit" update="timeline carDetail" onclick="PF('Dialog').show()" style=" background:white; width:64%; height:50px;" />
+	
+		      <p:dialog header="Status" widgetVar="Dialog" showEffect="fade" hideEffect="fade" resizable="false">
+		      
+		        <h:panelGrid columns="2">
+						<h:outputText value="Select your Problem " />
+                    							<p:selectOneRadio style=" font-size: 19px; font-family: initial;"  value="#{loginController.userTimelineDTO.type}">
+										              <f:selectItem itemLabel="Java" itemValue="java"/>
+										            <f:selectItem itemLabel="JSF" itemValue="JSF" />
+										            <f:selectItem itemLabel="English" itemValue="English" />
+										        </p:selectOneRadio>
+										        
+						<p:outputLabel value="Details :" />
+						<p:inputTextarea value="#{loginController.userTimelineDTO.status}" rows="2" style="width:214px" /><br/>
+						 	<p:fileUpload value="#{loginController.uploadedFile}" skinSimple="true" mode="simple" style="float:left;"/>
+				</h:panelGrid>	
+					 
+			 <p:commandButton value="Post" action="#{loginController.statusSave}" update="status" icon="fa fa-add" ajax="false" />
+			
+		    </p:dialog>
+	</div>
+	
+	<style></style>
+	<div style="width: 60%;  margin-left: 10%; margin-top: 10px; float: left" id="timeline">
+	<p:dataScroller class="name" value="#{loginController.userTimeList}" var="status" style="background-color:#f00;">
+			<div style="-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+						-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+						 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);border-radius:4px; background-color:#fff;padding:20px !important;margin-bottom:20px;">
+            <p:outputPanel  style="">  
+               
+               <h:panelGrid columns="1" style="margin-left:10px">
+                <h:outputText value="#{status.userBasicInfo.name}"  style="font-weight: bold; color:blue; float:left"/>
+                
+               </h:panelGrid>
+               
+              	 <h:panelGrid columns="2" cellspacing="5" style="margin-left:10px">
+               
+                    <h:outputText value="#{status.date}" />
+ 
+                    <!-- <h:outputText value="#{status.type}" style="font-weight:bolder; width:60% !important; margin-left:20px"/>
+                     -->
+                  </h:panelGrid>
+       
+               
+                <h:panelGrid columns="1" style=" margin-left:8px">
+                    <h:outputText  value="#{status.status}" style=" white-space:pre-line;"/>
+                </h:panelGrid>
+                
+                <div style="width:100%;padding:10px;"></div>
+                
+         	  <h:panelGrid id="like_comment_bar" columns="4" style="margin-top:-10px" >
+
+	          	<p:commandButton action="#{hubmorController.saveLike}" icon="fa fa-thumbs-up" style="background:none;" value="Like" update="timeline" >
+	          	<f:setPropertyActionListener value="#{status}" target="#{hubmorController.userTimelineDTO}" />
+	   
+	          	</p:commandButton> 
+	          	
+	          	<p:commandButton icon="fa fa-comment" style="background:none;" value="Comment" update="timeline" oncomplete="PF('userDialog').show()">
+	         	<f:setPropertyActionListener value="#{status}" target="#{hubmorController.userTimelineDTO}" />
+	          	</p:commandButton>
+	          	
+	          	<div style="width:100%;padding:10px;"></div>
+	          	
+	          	 <p:dialog header="Comment" widgetVar="userDialog" showEffect="fade" hideEffect="fade" resizable="false">
+		    		<p:inputTextarea value="#{hubmorController.commentDTO.userCom}" rows="1" cols="40"/>
+		          	<p:commandButton action="#{hubmorController.saveComment}" icon="fa fa-send" style="background:none; margin-left:10px; width:50px " update="com" ajax="false"/>
+	          	</p:dialog>
+	          </h:panelGrid>   
+	          <div style="width:100%;padding:10px;float:left;"></div>    
+        
+         	 <p:outputLabel value="#{hubmorController.numberOfLiks}"/>
+ 
+          </p:outputPanel >
+	           
+
+	          
+	          
+	          <p:dataScroller var="like" style="borde:none">
+	          		<h:panelGrid>
+	          			<p:outputLabel value="#{like.userlike}" />
+	          		
+	          		</h:panelGrid>
+	          		
+	         
+	          </p:dataScroller>
+	          </div>
+     
+    </p:dataScroller>			
+	</div>
+	<style>
+	/* .erty:hover {background-color:#b6c1cb;color:#fff !important;width:100%;borde-radius:9px !important;transition:1s;} */
+	.erty:hover a {background-color:#b6c1cb;color:#fff !important;width:100%;}
+	
+	
+	</style>
+	
+	<div id="Active-bar" style="overflow-y:scroll;overflow-x:hidden; height:413px;margin-top:-66px;margin-left:70%;position:fixed;width: 20%;-webkit-box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+				-moz-box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+				box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75); " >
+	
+	<p:dataScroller value="#{hubmorController.userActiveList}" var="active">
+	
+	<h:panelGrid class="erty" columns="2" cellpadding="3">
+	
+	<p:graphicImage value="/Upload/picture/#{active.userBasicInfo.photoPath}" style="width:40px; height:40px;  border-radius: 60px;" />
+		<p:commandLink class="name_1" value="#{active.userBasicInfo.name}" action="messages.xhtml?faces-redirect=true" style="text-decoration:none;" >
+		<f:setPropertyActionListener value="#{active}" target="#{hubmorController.usersActiveDTO}"/>
+		</p:commandLink>
+		</h:panelGrid>
+	</p:dataScroller>
+	
+	</div>
+	
+		
+	</h:form>
+
+</ui:define>
+
+</ui:composition>

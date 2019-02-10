@@ -1,0 +1,20 @@
+<ui:composition
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+
+<p:menu toggleable="true">
+
+<p:submenu label="Student">
+<p:menuitem value="Timeline" url="/user/timeline.xhtml" />
+<p:menuitem value="profile" url="/user/profile.xhtml" />
+</p:submenu>
+
+<p:submenu label="Teacher" >
+<p:menuitem value="Student List" url="/user/StudentData/studentList.xhtml" />
+<p:menuitem value="Teacher List" url="/user/TeacherData/teacherList.xhtml" />
+</p:submenu>
+
+</p:menu>
+
+</ui:composition> 

@@ -1,0 +1,137 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/template/template.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="timeline" enctype="multipart/form-data" >
+	
+	<p:growl />
+	
+	<!-- user profile div -->
+	<style>.sara34 table{width:100%;}
+	.sara34 table tr {width:100%;}
+	.sara34 table tr  td {padding:3px;}
+	.sara34 table tr  td:first-child: {width:40%;font-weight:bolder !important;}
+	</style>
+	<div class="sara34" style="position:fixed;padding:20px;width: 30%; float: left; margin-top: 20px; margin-left: 10px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);" id ="profile">
+	<p:dataScroller value="#{loginController.userBasicInfoList}" var="user" style="">
+        <p:outputPanel  style=" margin-bottom:8px; margin-top:5px;">
+               
+               <h:panelGrid columns="1" style="margin-left:10px">
+            	  <p:graphicImage value="/Upload/picture/#{user.photoPath}" stream="false" style="width:190px; height:180px; border-radius: 20px; margin-left:30px	" />
+                	<h:outputText value="#{user.name}" style="font-weight: bold; margin-left:50px; font-size:15px; color:blue " />
+               </h:panelGrid>
+               
+              	 <h:panelGrid columns="2" style="margin-left:10px">
+               		
+               		<h:outputText value="Email:"/>
+                    <h:outputText value="#{user.email}" />
+ 					
+ 					
+ 					<h:outputText value="Gender:"/>
+                    <h:outputText value="#{user.gender}" />
+                    
+                    <h:outputText value="Number:" />
+		            <h:outputText value="#{user.mobileNo}"/>
+		                
+		            <h:outputText value="Birth Of Date:" />
+		           	<h:outputText  value="#{user.dateOfBirth}"/>
+                    
+                      <h:outputText value="Your Experts:" />
+                      <h:outputText  value="#{user.experts}"/>
+                  </h:panelGrid>
+               
+                <h:panelGrid columns="2" cellpadding="5" style=" margin-left:8px">
+                    <h:outputText  value="#{status.status}" style=" white-space:pre-line;"/>
+                </h:panelGrid>
+                
+              <p:commandButton value="Update" icon="fa fa-edit"  update="timeline carDetail" oncomplete="PF('userDialog').show()" style="background:none; border:2px solid black; border:none !important;">
+			<f:setPropertyActionListener value="#{user}" target="#{loginController.userBasicInfoDTO}"/>
+			</p:commandButton>
+                
+                
+          </p:outputPanel>
+      
+      
+		      <p:dialog header="Update Profile info" widgetVar="userDialog" showEffect="fade" hideEffect="fade" resizable="false" style="width:400px">
+		        <p:outputPanel id="carDetail" style="text-align:center; width:400px">
+		            <h:panelGrid  columns="2">
+		               	<p:outputLabel value="Photo :"/> 
+		               	<p:fileUpload value="#{loginController.uploadFile}" skinSimple="true" mode="simple" style="float:left;"/>
+		 
+		                <h:outputText value="Name " />
+		                <h:inputText value="#{loginController.userBasicInfoDTO.name}" size="30" style="float:left;"/>
+		 
+		       
+		                <h:outputText value="Gender " />
+		                <h:inputText value="#{loginController.userBasicInfoDTO.gender}" size="30" style="float:left;"/>
+		                
+		                <h:outputText value="Number" />
+		                <h:inputText value="#{loginController.userBasicInfoDTO.mobileNo}" size="30" style="float:left;"/>
+		                
+		                <h:outputText value="Birth of Date" />
+		                <p:inputMask mask="99/99/9999" value="#{loginController.userBasicInfoDTO.dateOfBirth}"  style="float:left;"/>
+		                
+		                <h:outputText value="Select your Experts:" />
+                  							  <p:selectOneRadio style=" font-size: 19px; font-family: initial;"  value="#{loginController.userBasicInfoDTO.experts}">
+										            <f:selectItem itemLabel="Java" itemValue="java"/>
+										            <f:selectItem itemLabel="JSF" itemValue="JSF" />
+										            <f:selectItem itemLabel="English" itemValue="English" />
+										        </p:selectOneRadio>
+						<p style="color:#eee;">#</p>
+		                
+		                
+		                <p:commandButton value="Save" action="#{loginController.editUser}" icon="fa fa-save" ajax="false" style="float:right;"/>
+		 
+		            </h:panelGrid>
+		        </p:outputPanel>
+		    </p:dialog>
+ 
+		</p:dataScroller>
+
+	</div>
+			
+	
+	<!-- user timeline   -->
+	
+	<div style="width: 55.5%; float: right; margin-right: 2%; margin-top: 20px;-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);" id="timeline">
+	<p:dataScroller class="name" value="#{loginController.userTimelineList}" var="status" style="border:none; width:500px;"> 
+            <p:outputPanel  style="background:white; margin-bottom:8px; margin-top:5px; ">
+             <p:commandButton action="#{hubmorController.deleteStatus}" icon="fa fa-ellipsis-h" style="float:right; background:none; border:none; float:right; margin-right:15px" ajax="false" update="timeline">
+              <f:setPropertyActionListener value="#{status}" target="#{hubmorController.userTimelineDTO}"/>
+             </p:commandButton> 
+             
+               <h:panelGrid style="margin-left:10px">
+                <h:outputText value="#{status.userBasicInfo.name}" style="font-weight: bold; color:blue;"/>
+               
+               </h:panelGrid>
+                
+              	 <h:panelGrid columns="1" style="margin-left:10px">
+               
+                    <h:outputText value="#{status.date}" />
+ 
+                    <h:outputText value="#{status.type}" style="font-weight:bolder;"/>
+                    
+                  </h:panelGrid>
+               
+                <h:panelGrid columns="2" cellpadding="5" style=" margin-left:8px">
+                    <h:outputText  value="#{status.status}" style=" white-space:pre-line;"/>
+                </h:panelGrid>
+          </p:outputPanel>
+     
+    </p:dataScroller>			
+	</div>	
+	</h:form>
+
+</ui:define>
+
+</ui:composition>
